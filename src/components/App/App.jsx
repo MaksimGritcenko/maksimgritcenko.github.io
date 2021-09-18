@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Nav from 'Components/Nav';
 import Routes from './Routes';
@@ -28,9 +28,7 @@ export const App = (props) => {
       <div className={`Container-Wrapper-${isLoggedIn === true ? 'isOpen' : 'isClosed'}`}>
         { renderNavigation() }
         <div className="MainContent">
-          <Switch>
-            <Routes />
-          </Switch>
+          <Routes />
         </div>
       </div>
     </Router>
