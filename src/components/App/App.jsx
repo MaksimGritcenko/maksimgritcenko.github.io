@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Switch } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Nav from 'Components/Nav';
@@ -58,10 +58,8 @@ export const App = (props) => {
     <Router>
       <div className={`Container-Wrapper-${isLoggedIn === true ? 'isOpen' : 'isClosed'}`}>
         { renderNavigation() }
-        <div className={`MainContent ${isActiveMobileNavigation ? 'isOpen' : ''}`}>
-          <Switch>
-            <Routes />
-          </Switch>
+        <div className="MainContent">
+          <Routes />
         </div>
       </div>
     </Router>
