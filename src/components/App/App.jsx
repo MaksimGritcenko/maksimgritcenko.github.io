@@ -24,7 +24,6 @@ export const App = (props) => {
     setIsMobile,
     isLoggedIn,
     admin,
-    isActiveMobileNavigation,
   } = props;
 
   useEffect(() => {
