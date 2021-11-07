@@ -31,10 +31,23 @@
         height: 100vh;
         width: 100%;
         background: var(--main-content-background-color);
-        margin-top: 70px;
+
+        @include mobile {
+          margin-top: 70px;
+        }
 
         &.isOpen {
           z-index: -1;
+        }
+
+        > main {
+          width: 95%;
+          margin: 0 auto;
+          margin-top: 50px;
+
+          @include mobile {
+            margin-top: 15px;
+          }
         }
       }
     }

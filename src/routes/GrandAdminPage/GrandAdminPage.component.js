@@ -1,7 +1,10 @@
 import React from 'react';
+import Editor from 'Components/Editor';
 
 export const GrandAdminPageComponent = () => (
-  <h1>Grand Admin</h1>
+  <main>
+    <Editor />
+  </main>
 );
 
 export default GrandAdminPageComponent;

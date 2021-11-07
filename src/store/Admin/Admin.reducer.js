@@ -60,7 +60,7 @@ export const getInitialState = () => ({
   admin: BrowserDatabase.getItem(ADMIN) || null,
   chatBoards: BrowserDatabase.getItem(CHAT_BOARDS) || null,
   isLoggedIn: !!BrowserDatabase.getItem(ADMIN),
-  isGrandAdmin: false,
+  isGrandAdmin: true,
 });
 
 export const AdminReducer = (
