@@ -7,32 +7,32 @@ import WithAuthRedirect from 'Hoc/WithAuthRedirect';
 import MainPage from './MainPage.component';
 
 export const mapStateToProps = (state) => ({
-  isLoggedIn: state.AdminReducer.isLoggedIn,
+    isLoggedIn: state.AdminReducer.isLoggedIn,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  logout: () => logout(dispatch),
+    logout: () => logout(dispatch),
 });
 
 export const MainPageContainer = (props) => {
-  const { logout } = props;
+    const { logout } = props;
 
-  function signOut() {
-    logout();
-  }
+    function signOut() {
+        logout();
+    }
 
-  const containerFunctions = {
-    signOut,
-  };
+    const containerFunctions = {
+        signOut,
+    };
 
-  return (
-    <MainPage
-      {...containerFunctions}
-    />
-  );
+    return (
+        <MainPage
+            {...containerFunctions}
+        />
+    );
 };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  WithAuthRedirect(),
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect(),
 )(MainPageContainer);

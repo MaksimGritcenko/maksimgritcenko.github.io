@@ -2,19 +2,19 @@
 // rgb(241, 241, 241)
 
 export const toolbarConfig = {
-  options: [
-    'inline',
-    'blockType',
-    'fontSize',
-    'list',
-    'history',
-  ],
-  inline: {
     options: [
-      'bold',
-      'italic',
-      'underline',
-      'strikethrough',
+        'inline',
+        'blockType',
+        'fontSize',
+        'list',
+        'history',
     ],
-  },
+    inline: {
+        options: [
+            'bold',
+            'italic',
+            'underline',
+            'strikethrough',
+        ],
+    },
 };

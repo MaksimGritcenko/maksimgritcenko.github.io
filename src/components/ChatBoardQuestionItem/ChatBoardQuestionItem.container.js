@@ -10,52 +10,52 @@ import ChatBoardQuestionItem from './ChatBoardQuestionItem.component';
 export const mapStateToProps = () => ({});
 
 export const mapDispatchToProps = (dispatch) => ({
-  deleteQuestion: (questionId) => deleteQuestion(dispatch, questionId),
-  openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
-  getQuestionFormulations: (questionId) => getQuestionFormulations(dispatch, questionId),
+    deleteQuestion: (questionId) => deleteQuestion(dispatch, questionId),
+    openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
+    getQuestionFormulations: (questionId) => getQuestionFormulations(dispatch, questionId),
 });
 
 export const ChatBoardQuestionItemContainer = (props) => {
-  const {
-    id,
-    deleteQuestion,
-    setIsEdittingPopupType,
-    openPopup,
-    setEdittingQstId,
-    getQuestionFormulations,
-  } = props;
+    const {
+        id,
+        deleteQuestion,
+        setIsEdittingPopupType,
+        openPopup,
+        setEdittingQstId,
+        getQuestionFormulations,
+    } = props;
 
-  const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
-  async function removeQuestion(questionId) {
-    setIsLoading(true);
-    await deleteQuestion(questionId);
-    setIsLoading(false);
-  }
+    async function removeQuestion(questionId) {
+        setIsLoading(true);
+        await deleteQuestion(questionId);
+        setIsLoading(false);
+    }
 
-  async function openEdittingPopup() {
-    setIsEdittingPopupType(true);
-    setEdittingQstId(id);
-    openPopup(CHATBOARD_ADD_QUESTION_POPUP);
-    await getQuestionFormulations(id);
-  }
+    async function openEdittingPopup() {
+        setIsEdittingPopupType(true);
+        setEdittingQstId(id);
+        openPopup(CHATBOARD_ADD_QUESTION_POPUP);
+        await getQuestionFormulations(id);
+    }
 
-  const containerProps = () => ({
-    ...props,
-    isLoading,
-  });
+    const containerProps = () => ({
+        ...props,
+        isLoading,
+    });
 
-  const containerFunctions = {
-    removeQuestion,
-    openEdittingPopup,
-  };
+    const containerFunctions = {
+        removeQuestion,
+        openEdittingPopup,
+    };
 
-  return (
-    <ChatBoardQuestionItem
-      {...containerProps()}
-      {...containerFunctions}
-    />
-  );
+    return (
+        <ChatBoardQuestionItem
+            {...containerProps()}
+            {...containerFunctions}
+        />
+    );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatBoardQuestionItemContainer);

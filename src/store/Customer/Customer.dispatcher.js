@@ -4,11 +4,11 @@ import { getCollectionDocsByWhere } from 'Utils/Query';
 const PATIENTS = 'customers';
 
 export const getPatients = async (adminId) => {
-  try {
-    const patients = await getCollectionDocsByWhere(PATIENTS, 'admin_id', adminId);
+    try {
+        const patients = await getCollectionDocsByWhere(PATIENTS, 'admin_id', adminId);
 
-    return patients;
-  } catch (e) {
-    alert(e);
-  }
+        return patients;
+    } catch (e) {
+        alert(e);
+    }
 };

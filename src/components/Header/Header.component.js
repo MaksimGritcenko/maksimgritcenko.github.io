@@ -11,39 +11,39 @@ import { CHAT_BOARD_MOBILE_TABS } from 'Routes/ChatBoardPage/ChatBoardPage.confi
 import { updateActivePopupId } from 'Store/Popup/Popup.dispatcher';
 
 export const mapDispatchToProps = (dispatch) => ({
-  openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
+    openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
 });
 
 export const HeaderComponent = ({ openPopup }) => {
-  function onSelectTabClick() {
-    openPopup(CHAT_BOARD_MOBILE_TABS);
-  }
+    function onSelectTabClick() {
+        openPopup(CHAT_BOARD_MOBILE_TABS);
+    }
 
-  function renderCBTabButton() {
-    if (window.location.pathname !== '/chat-board') {
-      return null;
+    function renderCBTabButton() {
+        if (window.location.pathname !== '/chat-board') {
+            return null;
+        }
+
+        return (
+            <Button
+                variant="outlined"
+                onClick={onSelectTabClick}
+                className="Tab-Button"
+            >
+                Select Tab
+            </Button>
+        );
     }
 
     return (
-      <Button
-        variant="outlined"
-        onClick={onSelectTabClick}
-        className="Tab-Button"
-      >
-        Select Tab
-      </Button>
+        <header className="Header">
+            { renderCBTabButton() }
+            <DrawerToggleButton />
+        </header>
     );
-  }
-
-  return (
-    <header className="Header">
-      { renderCBTabButton() }
-      <DrawerToggleButton />
-    </header>
-  );
 };
 
 export default compose(
-  connect(null, mapDispatchToProps),
-  withRouter,
+    connect(null, mapDispatchToProps),
+    withRouter,
 )(HeaderComponent);

@@ -7,28 +7,28 @@ import WithAuthRedirect from 'Hoc/WithAuthRedirect';
 import StatisticsPage from './StatisticsPage.component';
 
 export const mapStateToProps = (state) => ({
-  isLoggedIn: state.AdminReducer.isLoggedIn,
-  admin: state.AdminReducer.admin,
+    isLoggedIn: state.AdminReducer.isLoggedIn,
+    admin: state.AdminReducer.admin,
 });
 
 export const mapDispatchToProps = () => ({});
 
 export const StatisticsPageContainer = ({ admin }) => {
-  // DEMONSTRATION
-  const [adminData, setAdminData] = useState(null);
+    // DEMONSTRATION
+    const [adminData, setAdminData] = useState(null);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setAdminData(admin);
-    }, 20000);
-  });
+    useEffect(() => {
+        setTimeout(() => {
+            setAdminData(admin);
+        }, 20000);
+    });
 
-  return (
-    <StatisticsPage admin={adminData} />
-  );
+    return (
+        <StatisticsPage admin={adminData} />
+    );
 };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  WithAuthRedirect(),
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect(),
 )(StatisticsPageContainer);

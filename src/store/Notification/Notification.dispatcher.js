@@ -1,7 +1,7 @@
 import {
-  pushNotification as pushNotificationAction,
-  removeNotification,
-  unactivateNotification,
+    pushNotification as pushNotificationAction,
+    removeNotification,
+    unactivateNotification,
 } from './Notification.action';
 
 import store from '..';
@@ -13,31 +13,31 @@ export const WARNING_TYPE = 'warning';
 export const SUCCESS_TYPE = 'success';
 
 export const pushNotification = (dispatch, type, message) => {
-  const { notifications } = store.getState().NotificationReducer;
+    const { notifications } = store.getState().NotificationReducer;
 
-  const notification = {
-    type,
-    message,
-    isActive: true,
-  };
+    const notification = {
+        type,
+        message,
+        isActive: true,
+    };
 
-  const isNotificationSet = notifications
-    .some(({ message }) => message === notification.message);
+    const isNotificationSet = notifications
+        .some(({ message }) => message === notification.message);
 
-  if (isNotificationSet) {
-    return;
-  }
+    if (isNotificationSet) {
+        return;
+    }
 
-  dispatch(pushNotificationAction(notification));
-
-  setTimeout(() => {
-    dispatch(unactivateNotification({
-      ...notification,
-      isActive: false,
-    }));
+    dispatch(pushNotificationAction(notification));
 
     setTimeout(() => {
-      dispatch(removeNotification(notification));
-    }, 300);
-  }, NOTIFICATION_LIFE_TIME);
+        dispatch(unactivateNotification({
+            ...notification,
+            isActive: false,
+        }));
+
+        setTimeout(() => {
+            dispatch(removeNotification(notification));
+        }, 300);
+    }, NOTIFICATION_LIFE_TIME);
 };

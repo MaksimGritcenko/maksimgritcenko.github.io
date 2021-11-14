@@ -8,32 +8,32 @@ import { ACTIVE_TAB_ID } from 'Components/Nav/Nav.config';
 import { logout } from 'Store/Admin/Admin.dispatcher';
 
 export const mapDispatchToProps = (dispatch) => ({
-  updateActivePopupId: (activePopupId) => dispatch(updateActivePopupId(activePopupId)),
-  setActiveMobileNavigation: (status) => dispatch(setActiveMobileNavigation(status)),
-  logout: () => logout(dispatch),
+    updateActivePopupId: (activePopupId) => dispatch(updateActivePopupId(activePopupId)),
+    setActiveMobileNavigation: (status) => dispatch(setActiveMobileNavigation(status)),
+    logout: () => logout(dispatch),
 });
 
 const SideDrawerContainer = (props) => {
-  const { updateActivePopupId, setActiveMobileNavigation, logout } = props;
-  const [activeTab, setActiveTab] = useState(BrowserDatabase.getItem('activeTabId'));
+    const { updateActivePopupId, setActiveMobileNavigation, logout } = props;
+    const [activeTab, setActiveTab] = useState(BrowserDatabase.getItem('activeTabId'));
 
-  const onCloseNavigation = (tabId) => {
-    setActiveTab(tabId);
-    BrowserDatabase.setItem(ACTIVE_TAB_ID, tabId);
-    updateActivePopupId('');
-    setActiveMobileNavigation(false);
-  };
+    const onCloseNavigation = (tabId) => {
+        setActiveTab(tabId);
+        BrowserDatabase.setItem(ACTIVE_TAB_ID, tabId);
+        updateActivePopupId('');
+        setActiveMobileNavigation(false);
+    };
 
-  function signOut() {
-    updateActivePopupId('');
-    setActiveMobileNavigation(false);
-    setActiveTab(1);
-    logout();
-  }
+    function signOut() {
+        updateActivePopupId('');
+        setActiveMobileNavigation(false);
+        setActiveTab(1);
+        logout();
+    }
 
-  return (
-    <SideDrawer onClick={onCloseNavigation} activeTab={activeTab} signOut={signOut} />
-  );
+    return (
+        <SideDrawer onClick={onCloseNavigation} activeTab={activeTab} signOut={signOut} />
+    );
 };
 
 export default connect(null, mapDispatchToProps)(SideDrawerContainer);

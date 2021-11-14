@@ -6,43 +6,78 @@ import { tabs } from 'Utils/Nav/NavLinks';
 import Button from '@mui/material/Button';
 import './Nav.styles.scss';
 
-export const NavComponent = ({ onClick, activeTab, signOut }) => {
-  function renderLinks() {
-    return tabs.map(({
-      title,
-      link,
-      id,
-    }) => (
-      <Link
-        key={id}
-        to={link}
-        onClick={() => onClick(id)}
-        className={`Navigation-Links ${activeTab === id ? 'Navigation-Links_isActive' : ''}`}
-      >
-        {title}
-      </Link>
-    ));
-  }
-  return (
-    <div className="NavigationContainer">
-      <nav className="NavigationWrapper">
-        <div className="Navigation-Links">
-          { renderLinks() }
-          <CsvReportButton />
-          <div className="CopyRight">
-            <Button
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={signOut}
+export const NavComponent = ({
+    onClick,
+    activeTab,
+    signOut,
+    admin: { isGrandAdmin },
+}) => {
+    const grandAdminTabIds = [
+        'Statistics',
+        'Settings',
+    ];
+
+    function renderLink({ title, link, id }) {
+        const isTabAvailForRegUsr = !grandAdminTabIds.includes(id);
+
+        if (!isTabAvailForRegUsr && !isGrandAdmin) {
+            return null;
+        }
+
+        return (
+            <Link
+                key={id}
+                to={link}
+                onClick={() => onClick(id)}
+                className={`Navigation-Links ${activeTab === id ? 'Navigation-Links_isActive' : ''}`}
             >
-              Logout
+                {title}
+            </Link>
+        );
+    }
+
+    function renderDownloadBtn() {
+        if (!isGrandAdmin) {
+            return null;
+        }
+
+        return <CsvReportButton />;
+    }
+
+    function renderLinks() {
+        return tabs.map(renderLink);
+    }
+
+    function renderLogoutBtn() {
+        return (
+            <Button
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={signOut}
+            >
+                Logout
             </Button>
-            <CopyRightComponent name="Johny" />
-          </div>
+        );
+    }
+
+    function renderCopyRight() {
+        return <CopyRightComponent name="Johny" />;
+    }
+
+    return (
+        <div className="NavigationContainer">
+            <nav className="NavigationWrapper">
+                <div className="Navigation-Links">
+                    { renderLinks() }
+                    { renderDownloadBtn() }
+                    <div className="CopyRight">
+                        { renderLogoutBtn() }
+                        { renderCopyRight() }
+                    </div>
+                </div>
+            </nav>
         </div>
-      </nav>
-    </div>
-  );
+    );
 };
 
 export default NavComponent;

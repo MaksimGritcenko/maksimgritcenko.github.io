@@ -8,30 +8,30 @@ import { connect } from 'react-redux';
 import { SIDE_DRAWER_POPUP_ID } from 'Components/SideDrawer/SideDrawer.config';
 
 export const mapDispatchToProps = (dispatch) => ({
-  openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
-  setActiveMobileNavigation: (status) => dispatch(setActiveMobileNavigation(status)),
+    openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
+    setActiveMobileNavigation: (status) => dispatch(setActiveMobileNavigation(status)),
 });
 
 const DrawerToggleButton = (props) => {
-  const { openPopup, setActiveMobileNavigation } = props;
+    const { openPopup, setActiveMobileNavigation } = props;
 
-  function openSideBarNavigation() {
-    openPopup(SIDE_DRAWER_POPUP_ID);
+    function openSideBarNavigation() {
+        openPopup(SIDE_DRAWER_POPUP_ID);
 
-    // Without setTimeout works only from second click.
-    // Little hack from Scandiweb )))
-    setTimeout(() => {
-      setActiveMobileNavigation(true);
-    }, 1);
-  }
+        // Without setTimeout works only from second click.
+        // Little hack from Scandiweb )))
+        setTimeout(() => {
+            setActiveMobileNavigation(true);
+        }, 1);
+    }
 
-  return (
-    <button type="button" className="toggle_button" onClick={openSideBarNavigation}>
-      <span className="toggle_button__line" />
-      <span className="toggle_button__line" />
-      <span className="toggle_button__line" />
-    </button>
-  );
+    return (
+        <button type="button" className="toggle_button" onClick={openSideBarNavigation}>
+            <span className="toggle_button__line" />
+            <span className="toggle_button__line" />
+            <span className="toggle_button__line" />
+        </button>
+    );
 };
 
 export default connect(null, mapDispatchToProps)(DrawerToggleButton);

@@ -11,39 +11,39 @@ import { CHATBOARD_ADD_TAB_POPUP } from './ChatBoardAddTabPopup.config';
 import './ChatBoardAddTabPopup.style.scss';
 
 export const ChatBoardAddTabPopup = (props) => {
-  const {
-    tabAddInputVal,
-    onChange, addTab,
-    isLoading,
-  } = props;
+    const {
+        tabAddInputVal,
+        onChange, addTab,
+        isLoading,
+    } = props;
 
-  function renderAddBoardItemBtn() {
+    function renderAddBoardItemBtn() {
+        return (
+            <IconButton
+                className="ChatBoardTabs-AddBtn"
+                onClick={addTab}
+            >
+                <AddIcon />
+            </IconButton>
+        );
+    }
+
     return (
-      <IconButton
-        className="ChatBoardTabs-AddBtn"
-        onClick={addTab}
-      >
-        <AddIcon />
-      </IconButton>
+        <Popup
+            popupId={CHATBOARD_ADD_TAB_POPUP}
+            hookClasses={['ChatBoardAddTabPopup']}
+        >
+            <div className="ChatBoardAddTabPopup-Wrapper">
+                <Input
+                    autoFocus
+                    placeholder="Enter a new tab name..."
+                    value={tabAddInputVal}
+                    onChange={onChange}
+                />
+                { renderAddBoardItemBtn() }
+            </div>
+            <Loader isLoading={isLoading} />
+        </Popup>
     );
-  }
-
-  return (
-    <Popup
-      popupId={CHATBOARD_ADD_TAB_POPUP}
-      hookClasses={['ChatBoardAddTabPopup']}
-    >
-      <div className="ChatBoardAddTabPopup-Wrapper">
-        <Input
-          autoFocus
-          placeholder="Enter a new tab name..."
-          value={tabAddInputVal}
-          onChange={onChange}
-        />
-        { renderAddBoardItemBtn() }
-      </div>
-      <Loader isLoading={isLoading} />
-    </Popup>
-  );
 };
 export default ChatBoardAddTabPopup;

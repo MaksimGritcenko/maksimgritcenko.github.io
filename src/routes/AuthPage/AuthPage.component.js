@@ -18,76 +18,76 @@ import './AuthPage.style.scss';
 const theme = createTheme();
 
 export const AuthPage = (props) => {
-  const {
-    handleSubmit,
-    onEmailChange,
-    onPasswordChange,
-    emailError,
-    passwordError,
-    isLoading,
-  } = props;
+    const {
+        handleSubmit,
+        onEmailChange,
+        onPasswordChange,
+        emailError,
+        passwordError,
+        isLoading,
+    } = props;
 
-  return (
-    <>
-      <Loader isLoading={isLoading} />
-      <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-            className={(emailError || passwordError) && 'Error'}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                helperText={emailError && 'Please enter a valid email.'}
-                onChange={onEmailChange}
-                onBlur={onEmailChange}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={onPasswordChange}
-                onBlur={onPasswordChange}
-                helperText={passwordError && `Password should contain at least ${PASSWORD_MIN_LENGTH} characters`}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
-            </Box>
-          </Box>
-        </Container>
-      </ThemeProvider>
-    </>
-  );
+    return (
+        <>
+            <Loader isLoading={isLoading} />
+            <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                    <CssBaseline />
+                    <Box
+                        sx={{
+                            marginTop: 8,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                        className={(emailError || passwordError) && 'Error'}
+                    >
+                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Sign in
+                        </Typography>
+                        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="email"
+                                label="Email Address"
+                                name="email"
+                                autoComplete="email"
+                                helperText={emailError && 'Please enter a valid email.'}
+                                onChange={onEmailChange}
+                                onBlur={onEmailChange}
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
+                                onChange={onPasswordChange}
+                                onBlur={onPasswordChange}
+                                helperText={passwordError && `Password should contain at least ${PASSWORD_MIN_LENGTH} characters`}
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Sign In
+                            </Button>
+                        </Box>
+                    </Box>
+                </Container>
+            </ThemeProvider>
+        </>
+    );
 };
 
 export default AuthPage;

@@ -1,37 +1,37 @@
 import {
-  UPDATE_ACTIVE_POPUP_ID,
-  SET_ACTIVE_MOBILE_NAVIGATION,
+    UPDATE_ACTIVE_POPUP_ID,
+    SET_ACTIVE_MOBILE_NAVIGATION,
 } from './Popup.action';
 
 const getInitialState = () => ({
-  activePopupId: '',
-  isActiveMobileNavigation: false,
+    activePopupId: '',
+    isActiveMobileNavigation: false,
 });
 
 export const PopupReducer = (
-  state = getInitialState(),
-  action,
+    state = getInitialState(),
+    action,
 ) => {
-  switch (action.type) {
+    switch (action.type) {
     case UPDATE_ACTIVE_POPUP_ID:
-      const { activePopupId } = action;
+        const { activePopupId } = action;
 
-      return {
-        ...state,
-        activePopupId,
-      };
+        return {
+            ...state,
+            activePopupId,
+        };
 
     case SET_ACTIVE_MOBILE_NAVIGATION:
-      const { status } = action;
+        const { status } = action;
 
-      return {
-        ...state,
-        isActiveMobileNavigation: status,
-      };
+        return {
+            ...state,
+            isActiveMobileNavigation: status,
+        };
 
     default:
-      return state;
-  }
+        return state;
+    }
 };
 
 export default PopupReducer;

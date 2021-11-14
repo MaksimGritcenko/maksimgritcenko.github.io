@@ -1,0 +1,7 @@
+@import "src/style/base/media";
+
+.GrandAdminPage {
+    display: grid;
+    grid-template-columns: 30% 68%;
+    column-gap: 2%;
+}

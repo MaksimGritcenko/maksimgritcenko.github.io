@@ -5,31 +5,31 @@ import AddIcon from '@mui/icons-material/Add';
 import './WithChatBoardRenders.style.scss';
 
 export const WithChatBoardRenders = (Component) => (props) => {
-  function renderAddItemBtn(text, onClick, isDisabled) {
+    function renderAddItemBtn(text, onClick, isDisabled) {
+        return (
+            <IconButton
+                className="WithChatBoardRenders-AddBtn"
+                onClick={onClick}
+                disabled={isDisabled}
+            >
+                <AddIcon />
+                <span>
+                    { text }
+                </span>
+            </IconButton>
+        );
+    }
+
+    const containerFunctions = {
+        renderAddItemBtn,
+    };
+
     return (
-      <IconButton
-        className="WithChatBoardRenders-AddBtn"
-        onClick={onClick}
-        disabled={isDisabled}
-      >
-        <AddIcon />
-        <span>
-          { text }
-        </span>
-      </IconButton>
+        <Component
+            {...props}
+            {...containerFunctions}
+        />
     );
-  }
-
-  const containerFunctions = {
-    renderAddItemBtn,
-  };
-
-  return (
-    <Component
-      {...props}
-      {...containerFunctions}
-    />
-  );
 };
 
 export default WithChatBoardRenders;

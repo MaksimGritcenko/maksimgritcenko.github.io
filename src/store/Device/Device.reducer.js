@@ -1,31 +1,31 @@
 import { IS_MOBILE } from './Device.action';
 
 const getIsMobile = () => {
-  const windowWidth = window.innerWidth;
-  const newIsMobile = windowWidth < 769;
-  return newIsMobile;
+    const windowWidth = window.innerWidth;
+    const newIsMobile = windowWidth < 769;
+    return newIsMobile;
 };
 
 export const getInitialState = () => ({
-  isMobile: getIsMobile(),
+    isMobile: getIsMobile(),
 });
 
 export const DeviceReducer = (
-  state = getInitialState(),
-  action,
+    state = getInitialState(),
+    action,
 ) => {
-  switch (action.type) {
+    switch (action.type) {
     case IS_MOBILE:
-      const { isMobile } = action;
+        const { isMobile } = action;
 
-      return {
-        ...state,
-        isMobile,
-      };
+        return {
+            ...state,
+            isMobile,
+        };
 
     default:
-      return state;
-  }
+        return state;
+    }
 };
 
 export default DeviceReducer;

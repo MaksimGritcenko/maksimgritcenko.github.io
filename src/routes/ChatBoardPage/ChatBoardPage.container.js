@@ -14,59 +14,59 @@ import ChatBoardPage from './ChatBoardPage.component';
 import { CHAT_BOARD_MOBILE_TABS } from './ChatBoardPage.config';
 
 export const mapStateToProps = (state) => ({
-  isLoggedIn: state.AdminReducer.isLoggedIn,
-  uid: state.AdminReducer.admin?.uid,
-  admin: state.AdminReducer.admin,
+    isLoggedIn: state.AdminReducer.isLoggedIn,
+    uid: state.AdminReducer.admin?.uid,
+    admin: state.AdminReducer.admin,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  getQuestionsForTab: (tabId) => getQuestionsForTab(dispatch, tabId),
-  setActiveNavigationTab: (tabId) => dispatch(setActiveNavigationTab(tabId)),
-  openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
+    getQuestionsForTab: (tabId) => getQuestionsForTab(dispatch, tabId),
+    setActiveNavigationTab: (tabId) => dispatch(setActiveNavigationTab(tabId)),
+    openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
 });
 
 export const ChatBoardPageContainer = (props) => {
-  const {
-    getQuestionsForTab,
-    setActiveNavigationTab,
-    openPopup,
-  } = props;
+    const {
+        getQuestionsForTab,
+        setActiveNavigationTab,
+        openPopup,
+    } = props;
 
-  const [activeTabId, setActiveTabId] = useState(null);
+    const [activeTabId, setActiveTabId] = useState(null);
 
-  function onTabClick(tabId) {
-    if (tabId === activeTabId) {
-      return;
+    function onTabClick(tabId) {
+        if (tabId === activeTabId) {
+            return;
+        }
+
+        setActiveTabId(tabId);
+        setActiveNavigationTab(tabId);
+        getQuestionsForTab(tabId);
     }
 
-    setActiveTabId(tabId);
-    setActiveNavigationTab(tabId);
-    getQuestionsForTab(tabId);
-  }
+    function onSelectTabClick() {
+        openPopup(CHAT_BOARD_MOBILE_TABS);
+    }
 
-  function onSelectTabClick() {
-    openPopup(CHAT_BOARD_MOBILE_TABS);
-  }
+    const containerProps = () => ({
+        activeTabId,
+        setActiveTabId: onTabClick,
+    });
 
-  const containerProps = () => ({
-    activeTabId,
-    setActiveTabId: onTabClick,
-  });
+    const containerFunctions = {
+        setActiveTabId: onTabClick,
+        onSelectTabClick,
+    };
 
-  const containerFunctions = {
-    setActiveTabId: onTabClick,
-    onSelectTabClick,
-  };
-
-  return (
-    <ChatBoardPage
-      {...containerProps()}
-      {...containerFunctions}
-    />
-  );
+    return (
+        <ChatBoardPage
+            {...containerProps()}
+            {...containerFunctions}
+        />
+    );
 };
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  WithAuthRedirect(),
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect(),
 )(ChatBoardPageContainer);

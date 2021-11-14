@@ -1,70 +1,70 @@
 import {
-  PUSH_NOTIFICATION,
-  REMOVE_NOTIFICATION,
-  UNACTIVATE_NOTIFICATION,
+    PUSH_NOTIFICATION,
+    REMOVE_NOTIFICATION,
+    UNACTIVATE_NOTIFICATION,
 } from './Notification.action';
 
 export const pushNotification = (state, action) => {
-  const { notifications: prevNotifications } = state;
-  const { notification } = action;
+    const { notifications: prevNotifications } = state;
+    const { notification } = action;
 
-  const notifications = [notification, ...prevNotifications];
+    const notifications = [notification, ...prevNotifications];
 
-  return {
-    ...state,
-    notifications,
-  };
+    return {
+        ...state,
+        notifications,
+    };
 };
 
 export const removeNotification = (state, action) => {
-  const { notifications: prevNotifications } = state;
-  const { notification } = action;
+    const { notifications: prevNotifications } = state;
+    const { notification } = action;
 
-  const notifications = prevNotifications
-    .filter(({ message }) => message !== notification.message);
+    const notifications = prevNotifications
+        .filter(({ message }) => message !== notification.message);
 
-  return {
-    ...state,
-    notifications,
-  };
+    return {
+        ...state,
+        notifications,
+    };
 };
 
 export const unactivateNotification = (state, action) => {
-  const { notifications: prevNotifications } = state;
-  const { notification } = action;
+    const { notifications: prevNotifications } = state;
+    const { notification } = action;
 
-  const oldNotifications = prevNotifications
-    .filter(({ message }) => message !== notification.message);
+    const oldNotifications = prevNotifications
+        .filter(({ message }) => message !== notification.message);
 
-  const notifications = [...oldNotifications, notification];
+    const notifications = [...oldNotifications, notification];
 
-  return {
-    ...state,
-    notifications,
-  };
+    return {
+        ...state,
+        notifications,
+    };
 };
 
 const getInitialState = () => ({
-  notifications: [],
+    notifications: [],
 });
 
 export const NotificationReducer = (
-  state = getInitialState(),
-  action,
+    state = getInitialState(),
+    action,
 ) => {
-  switch (action.type) {
+    switch (action.type) {
     case PUSH_NOTIFICATION:
-      return pushNotification(state, action);
+        return pushNotification(state, action);
 
     case REMOVE_NOTIFICATION:
-      return removeNotification(state, action);
+        return removeNotification(state, action);
 
     case UNACTIVATE_NOTIFICATION:
-      return unactivateNotification(state, action);
+        return unactivateNotification(state, action);
 
     default:
-      return state;
-  }
+        return state;
+    }
 };
 
 export default NotificationReducer;

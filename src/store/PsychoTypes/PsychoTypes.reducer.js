@@ -1,27 +1,27 @@
 import {
-  UPDATE_PSYCHOTYPES,
+    UPDATE_PSYCHOTYPES,
 } from './PsychoTypes.action';
 
 export const getInitialState = () => ({
-  psychotypes: [],
+    psychotypes: [],
 });
 
 export const PsychoTypesReducer = (
-  state = getInitialState(),
-  action,
+    state = getInitialState(),
+    action,
 ) => {
-  switch (action.type) {
+    switch (action.type) {
     case UPDATE_PSYCHOTYPES:
-      const { psychotypes } = action;
+        const { psychotypes } = action;
 
-      return {
-        ...state,
-        psychotypes,
-      };
+        return {
+            ...state,
+            psychotypes,
+        };
 
     default:
-      return state;
-  }
+        return state;
+    }
 };
 
 export default PsychoTypesReducer;

@@ -7,34 +7,34 @@ import { CHATBOARD_ADD_TAB_POPUP } from 'Components/ChatBoardAddTabPopup/ChatBoa
 import ChatBoardTabItem from './ChatBoardTabs.component';
 
 export const mapStateToProps = (state) => ({
-  tabs: state.AdminReducer.chatBoards,
+    tabs: state.AdminReducer.chatBoards,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
+    openPopup: (popupId) => updateActivePopupId(dispatch, popupId),
 });
 
 export const ChatBoardTabItemContainer = (props) => {
-  const { openPopup } = props;
+    const { openPopup } = props;
 
-  function onAddTabClick() {
-    openPopup(CHATBOARD_ADD_TAB_POPUP);
-  }
+    function onAddTabClick() {
+        openPopup(CHATBOARD_ADD_TAB_POPUP);
+    }
 
-  const containerFunctions = {
-    onAddTabClick,
-  };
+    const containerFunctions = {
+        onAddTabClick,
+    };
 
-  const containerProps = {
-    ...props,
-  };
+    const containerProps = {
+        ...props,
+    };
 
-  return (
-    <ChatBoardTabItem
-      {...containerProps}
-      {...containerFunctions}
-    />
-  );
+    return (
+        <ChatBoardTabItem
+            {...containerProps}
+            {...containerFunctions}
+        />
+    );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatBoardTabItemContainer);

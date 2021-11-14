@@ -7,36 +7,38 @@ import { ACTIVE_TAB_ID } from 'Components/Nav/Nav.config';
 import { logout } from 'Store/Admin/Admin.dispatcher';
 
 export const mapStateToProps = (state) => ({
-  activeTab: state.ChatBoardReducer.activeTab,
+    activeTab: state.ChatBoardReducer.activeTab,
+    admin: state.AdminReducer.admin,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  setActiveNavigationTab: (tabId) => dispatch(setActiveNavigationTab(tabId)),
-  logout: () => logout(dispatch),
+    setActiveNavigationTab: (tabId) => dispatch(setActiveNavigationTab(tabId)),
+    logout: () => logout(dispatch),
 });
 
 export const NavContainer = (props) => {
-  const {
-    setActiveNavigationTab,
-    activeTab,
-    logout,
-  } = props;
+    const {
+        setActiveNavigationTab,
+        activeTab,
+        logout,
+    } = props;
 
-  const handleClickActiveTab = (tabId) => {
-    setActiveNavigationTab(tabId);
-    BrowserDatabase.setItem(ACTIVE_TAB_ID, tabId);
-  };
+    const handleClickActiveTab = (tabId) => {
+        setActiveNavigationTab(tabId);
+        BrowserDatabase.setItem(ACTIVE_TAB_ID, tabId);
+    };
 
-  function signOut() {
-    logout();
-  }
+    function signOut() {
+        logout();
+    }
 
-  return (
-    <NavComponent
-      onClick={handleClickActiveTab}
-      activeTab={activeTab}
-      signOut={signOut}
-    />
-  );
+    return (
+        <NavComponent
+            {...props}
+            onClick={handleClickActiveTab}
+            activeTab={activeTab}
+            signOut={signOut}
+        />
+    );
 };
 export default connect(mapStateToProps, mapDispatchToProps)(NavContainer);

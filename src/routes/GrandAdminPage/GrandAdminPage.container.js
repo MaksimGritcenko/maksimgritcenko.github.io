@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -7,20 +7,35 @@ import GrandAdminPageComponent from 'Routes/GrandAdminPage/GrandAdminPage.compon
 import WithAuthRedirect from 'Hoc/WithAuthRedirect';
 
 export const mapStateToProps = (state) => ({
-  isGrandAdmin: state.AdminReducer.isGrandAdmin,
-  isLoggedIn: state.AdminReducer.isLoggedIn,
+    isGrandAdmin: state.AdminReducer.isGrandAdmin,
+    isLoggedIn: state.AdminReducer.isLoggedIn,
 });
 
 export const GrandAdminPageContainer = (props) => {
-  const { isGrandAdmin } = props;
+    const [isLoading, setIsLoading] = useState(false);
 
-  if (!isGrandAdmin) {
-    return <Redirect to="/" />;
-  }
+    const { isGrandAdmin } = props;
 
-  return <GrandAdminPageComponent />;
+    if (!isGrandAdmin) {
+        return <Redirect to="/" />;
+    }
+
+    const containerFunctions = {
+        setIsLoading,
+    };
+
+    const containerProps = () => ({
+        isLoading,
+    });
+
+    return (
+        <GrandAdminPageComponent
+            {...containerProps()}
+            {...containerFunctions}
+        />
+    );
 };
 export default compose(
-  connect(mapStateToProps, null),
-  WithAuthRedirect(),
+    connect(mapStateToProps, null),
+    WithAuthRedirect(),
 )(GrandAdminPageContainer);

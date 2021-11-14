@@ -1,7 +1,16 @@
 
 
 .EditorWrapper {
-    padding: 10px;
+    &-Container {
+        position: relative;
+    }
+
+    &-SaveBtn.css-sghohy-MuiButtonBase-root-MuiButton-root {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        width: 100px;
+    }
 
     .EditorToolbar {
         display: flex;

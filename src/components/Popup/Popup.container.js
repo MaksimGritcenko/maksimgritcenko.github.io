@@ -9,53 +9,53 @@ import { ESCAPE_CODE } from './Popup.config';
 import Popup from './Popup.component';
 
 export const mapStateToProps = (state) => ({
-  activePopupId: state.PopupReducer.activePopupId,
+    activePopupId: state.PopupReducer.activePopupId,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  updateActivePopupId: (activePopupId) => dispatch(updateActivePopupId(activePopupId)),
-  setActiveMobileNavigation: (status) => dispatch(setActiveMobileNavigation(status)),
+    updateActivePopupId: (activePopupId) => dispatch(updateActivePopupId(activePopupId)),
+    setActiveMobileNavigation: (status) => dispatch(setActiveMobileNavigation(status)),
 });
 
 export const PopupContainer = (props) => {
-  const {
-    updateActivePopupId, popupId, activePopupId, setActiveMobileNavigation,
-  } = props;
+    const {
+        updateActivePopupId, popupId, activePopupId, setActiveMobileNavigation,
+    } = props;
 
-  useEffect(() => {
-    document.addEventListener('keyup', onEscUp);
-  });
+    useEffect(() => {
+        document.addEventListener('keyup', onEscUp);
+    });
 
-  const containerFunctions = {
-    closePopup,
-  };
+    const containerFunctions = {
+        closePopup,
+    };
 
-  function onEscUp(e) {
-    const { keyCode } = e;
+    function onEscUp(e) {
+        const { keyCode } = e;
 
-    if (keyCode === ESCAPE_CODE) {
-      closePopup();
-    }
-  }
-
-  function closePopup() {
-    if (popupId !== activePopupId) {
-      return;
+        if (keyCode === ESCAPE_CODE) {
+            closePopup();
+        }
     }
 
-    updateActivePopupId('');
-    setActiveMobileNavigation(false);
-  }
+    function closePopup() {
+        if (popupId !== activePopupId) {
+            return;
+        }
 
-  return (
-    <Popup
-      {...props}
-      {...containerFunctions}
-    />
-  );
+        updateActivePopupId('');
+        setActiveMobileNavigation(false);
+    }
+
+    return (
+        <Popup
+            {...props}
+            {...containerFunctions}
+        />
+    );
 };
 
 export default compose(
-  memo,
-  connect(mapStateToProps, mapDispatchToProps),
+    memo,
+    connect(mapStateToProps, mapDispatchToProps),
 )(PopupContainer);

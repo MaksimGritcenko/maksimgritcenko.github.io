@@ -12,3 +12,8 @@ export const ANSWERS_COLLECTION = 'anwsers';
 
 // psychotypes collection
 export const PSYCHOTYPES_COLLECTION = 'psychotypes';
+
+// cusomizable content
+export const CUSTOMIZABLE_CONTENT = 'customizable_content';
+
+export const CUSTOMIZABLE_ONBOARDING = 'customizable_onboarding';
