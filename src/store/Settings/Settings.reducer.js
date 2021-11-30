@@ -8,7 +8,7 @@ export const updateOnboardingContent = (state, action) => {
 
     return {
         ...state,
-        customizableContent
+        customizableContent,
     };
 };
 

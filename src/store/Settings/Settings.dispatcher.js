@@ -19,12 +19,12 @@ export const updateOnboardingSlidesContent = async (dispatch, data, prevData, se
 
         const newContentItemData = {
             ...prevDocData,
-            ...data
+            ...data,
         };
 
         return {
             data: newContentItemData,
-            id
+            id,
         };
     });
 

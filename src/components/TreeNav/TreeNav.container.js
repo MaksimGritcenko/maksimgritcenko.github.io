@@ -7,6 +7,7 @@ import {
     CONTENT_CUSTOMIZER,
     ONBOARDING_CUSTOMIZE_CONTENT,
     ONBOARDING_SLIDE_CUSTOMIZE_CONTENT,
+    INSTRUCTIONS_CONTENT,
 } from './TreeNav.config';
 
 import TreeNav from './TreeNav.component';
@@ -45,6 +46,11 @@ export const TreeNavContainer = (props) => {
                             label: 'Slide 2',
                         },
                     ],
+                },
+                {
+                    id: INSTRUCTIONS_CONTENT,
+                    label: 'Instructions content',
+                    isAddable: true,
                 },
             ],
         },
