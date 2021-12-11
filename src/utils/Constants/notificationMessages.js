@@ -4,6 +4,8 @@ export const SUCCESS_LOGIN_MESSAGE = 'You succesfully logged in';
 
 export const SUCCESS_LOGOUT_MESSAGE = 'You succesfully logged out!';
 
+export const SUCCESS_CONTENT_SAVE_MESSAGE = 'Content is successfully saved!';
+
 // warning messages
 
 export const WARNING_ON_EMPTY_QUESTION_ADD = 'A question name is empty';

@@ -37,13 +37,13 @@ export const EditorContainer = (props) => {
         '');
 
     const [contentInHtmlForm, setContentInHtmlForm] = useState();
-    const [editorState, setEditorState] = useState(
-        EditorState.createWithContent(
-            stateFromHTML(currentContent),
-        ),
-    );
+    const [editorState, setEditorState] = useState(() => setInitialEditorState());
 
     useEffect(() => {
+        if (!activeMenuItem) {
+            return;
+        }
+
         onTextAreaClick('addEventListener');
         window.addEventListener('onContentSelect', onContentSelectEvent);
 
@@ -53,8 +53,15 @@ export const EditorContainer = (props) => {
         };
     });
 
+    function setInitialEditorState() {
+        const state = EditorState.createWithContent(stateFromHTML(currentContent));
+        setContentInHtmlForm(stateToHTML(state.getCurrentContent()));
+        return state;
+    }
+
     function onContentSelectEvent() {
         const newState = EditorState.createWithContent(stateFromHTML(currentContent));
+        setContentInHtmlForm(stateToHTML(newState.getCurrentContent()));
         setEditorState(newState);
     }
 

@@ -32,7 +32,7 @@ export const ClickOutside = (props) => {
             return;
         }
 
-        if (childrenRefs.every(({ current }) => !current.contains(target))) {
+        if (childrenRefs.every(({ current }) => current && !current.contains(target))) {
             onClick();
         }
     }

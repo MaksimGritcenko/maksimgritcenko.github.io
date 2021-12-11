@@ -11,6 +11,7 @@ export const EditorComponent = (props) => {
         editorState,
         onContentChange,
         onSaveClick,
+        activeMenuItem
     } = props;
 
     function renderSaveBtn() {
@@ -19,10 +20,15 @@ export const EditorComponent = (props) => {
                 className="EditorWrapper-SaveBtn"
                 variant="contained"
                 onClick={onSaveClick}
+                disabled={ !activeMenuItem }
             >
                 Save
             </Button>
         );
+    }
+
+    if (!activeMenuItem) {
+        return null;
     }
 
     return (
