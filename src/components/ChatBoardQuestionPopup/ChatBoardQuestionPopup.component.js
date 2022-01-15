@@ -25,7 +25,7 @@ export const ChatBoardQuestionPopup = (props) => {
             <div className="ChatBoardQuestionPopup-AddQstButton">
                 <Button
                     variant="outlined"
-                    onClick={ onQuestionAddClick }
+                    onClick={onQuestionAddClick}
                 >
                     Add
                 </Button>

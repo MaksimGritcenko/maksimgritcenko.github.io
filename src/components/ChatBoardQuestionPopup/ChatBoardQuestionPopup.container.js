@@ -51,7 +51,7 @@ export const ChatBoardQuestionPopupContainer = (props) => {
             questionInput: questionAddInputVal,
             adminId,
             created_at: timestamp,
-            updated_at: timestamp
+            updated_at: timestamp,
         };
 
         setIsLoading(true);
@@ -64,14 +64,12 @@ export const ChatBoardQuestionPopupContainer = (props) => {
         }
     }
 
-    const containerProps = () => {
-        return {
-            ...props,
-            questionAddInputVal,
-            answerAddInputVal,
-            isLoading,
-        };
-    };
+    const containerProps = () => ({
+        ...props,
+        questionAddInputVal,
+        answerAddInputVal,
+        isLoading,
+    });
 
     const containerFunctions = {
         onQuestionAddChange,
