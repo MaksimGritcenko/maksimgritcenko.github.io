@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { updateActivePopupId } from 'Store/Popup/Popup.action';
 
 import ChatBoardAddTabPopup from 'Components/ChatBoardAddTabPopup';
-import ChatBoardTabs from 'Components/ChatBoardTabs';
 import ChatBoardQuestions from 'Components/ChatBoardQuestions';
 
 import './ChatBoardPage.style.scss';
