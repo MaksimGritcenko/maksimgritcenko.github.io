@@ -1,11 +1,9 @@
 import React from 'react';
 import Input from '@mui/material/Input';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add';
+import Button from '@mui/material/Button';
 
 import Loader from 'Components/Loader';
 import Popup from 'Components/Popup';
-import ChatBoardQuestionPsychotype from 'Components/ChatBoardQuestionPsychotype';
 
 import { CHATBOARD_ADD_QUESTION_POPUP } from './ChatBoardQuestionPopup.config';
 
@@ -13,65 +11,45 @@ import './ChatBoardQuestionPopup.style.scss';
 
 export const ChatBoardQuestionPopup = (props) => {
     const {
-        psychotypes,
-        formulations,
         questionAddInputVal,
-        edittingQstId,
+        answerAddInputVal,
         isEdittingPopupType,
         isLoading,
         onQuestionAddChange,
+        onAnswerAddChange,
         onQuestionAddClick,
     } = props;
 
-    function renderAddBoardItemBtn(onClick) {
+    function renderAddQuestionBtn() {
         return (
-            <IconButton onClick={onClick}>
-                <AddIcon />
-            </IconButton>
-        );
-    }
-
-    function renderEdditingQuestionPopupType() {
-        if (!psychotypes || !psychotypes.length) {
-            return (
-                <p>
-                    No psychotypes found.
-                </p>
-            );
-        }
-
-        return (
-            <div>
-                { psychotypes.map(renderPsychotypeFormulationField) }
+            <div className="ChatBoardQuestionPopup-AddQstButton">
+                <Button
+                    variant="outlined"
+                    onClick={ onQuestionAddClick }
+                >
+                    Add
+                </Button>
             </div>
         );
     }
 
-    function renderPsychotypeFormulationField(psychotype) {
-        const { id } = psychotype;
-        const formulation = formulations
-            .filter(({ id: formulationId }) => formulationId === id)[0];
-
-        return (
-            <ChatBoardQuestionPsychotype
-                key={id}
-                questionId={edittingQstId}
-                formulation={formulation}
-                psychotype={psychotype}
-            />
-        );
-    }
-
-    function renerAddQuestionType() {
+    function renderAddQuestion() {
         return renderAddInput(
-            'Enter a new question name...',
+            'Enter a new question...',
             questionAddInputVal,
             onQuestionAddChange,
-            onQuestionAddClick,
         );
     }
 
-    function renderAddInput(placeholder, value, onChange, onClick, isDisabled = false) {
+    function renderAddAnswer() {
+        return renderAddInput(
+            'Enter an answer...',
+            answerAddInputVal,
+            onAnswerAddChange,
+        );
+    }
+
+    function renderAddInput(placeholder, value, onChange) {
         return (
             <div className="ChatBoardQuestionPopup-Input">
                 <Input
@@ -79,19 +57,21 @@ export const ChatBoardQuestionPopup = (props) => {
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    disabled={isDisabled}
                 />
-                { renderAddBoardItemBtn(onClick) }
             </div>
         );
     }
 
     function renderPopupContent() {
-        if (isEdittingPopupType) {
-            return renderEdditingQuestionPopupType();
-        }
-
-        return renerAddQuestionType();
+        return (
+            <div>
+                { renderAddQuestion() }
+                <br />
+                { renderAddAnswer() }
+                <br />
+                { renderAddQuestionBtn() }
+            </div>
+        );
     }
 
     return (

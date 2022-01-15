@@ -5,6 +5,11 @@
         min-width: 350px;
     }
 
+    &-AddQstButton {
+        width: 100%;
+        text-align: right;
+    }
+
     &_isEditting {
         width: 550px;
         max-height: 500px;
@@ -27,14 +32,8 @@
 
     &-Input {
         width: 100%;
-
         display: grid;
-        grid-template-columns: 92% 8%;
-
-        @include mobile {
-            margin-right: 5px;
-            grid-template-columns: 88% 12%;
-        }
+        grid-template-columns: 100%;
 
         > button {
             width: 40px;

@@ -8,7 +8,7 @@ export const SUCCESS_CONTENT_SAVE_MESSAGE = 'Content is successfully saved!';
 
 // warning messages
 
-export const WARNING_ON_EMPTY_QUESTION_ADD = 'A question name is empty';
+export const WARNING_ON_EMPTY_QUESTION_ADD = "Question and answer can't be empty";
 
 export const WARNING_ON_EMPTY_FORMULATION = 'A formulation is empty';
 

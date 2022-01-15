@@ -76,9 +76,9 @@ export const getQuestionsForTab = async (dispatch, tabId) => {
 };
 
 export const addQuestion = async (dispatch, data) => {
-    const { name } = data;
+    const { answerInput, questionInput } = data;
 
-    if (!name) {
+    if (!answerInput || !questionInput) {
         pushNotification(dispatch, WARNING_TYPE, WARNING_ON_EMPTY_QUESTION_ADD);
         return false;
     }
@@ -92,6 +92,7 @@ export const addQuestion = async (dispatch, data) => {
 
     dispatch(updateQuestions(questionData));
     dispatch(updateActivePopupId(''));
+    return true;
 };
 
 export const addQuestionFormulation = async (dispatch, questionId, psychotypeId, formulationText) => {

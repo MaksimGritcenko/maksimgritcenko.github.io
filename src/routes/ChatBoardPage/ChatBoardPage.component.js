@@ -22,41 +22,7 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 export const ChatBoardPage = (props) => {
-    const {
-        activeTabId,
-        setActiveTabId,
-        isMobile,
-    } = props;
-
-    function renderMobileTabs() {
-        return (
-            <>
-                <Popup
-                    popupId={CHAT_BOARD_MOBILE_TABS}
-                    hookClasses={['ChatBoardMobileTabs']}
-                >
-                    { renderChatBoardTabs() }
-                </Popup>
-            </>
-        );
-    }
-
-    function renderChatBoardTabs() {
-        return (
-            <ChatBoardTabs
-                activeTabId={activeTabId}
-                setActiveTabId={setActiveTabId}
-            />
-        );
-    }
-
-    function renderTabsConditionally() {
-        if (!isMobile) {
-            return renderChatBoardTabs();
-        }
-
-        return renderMobileTabs();
-    }
+    const { activeTabId } = props;
 
     return (
         <main
@@ -64,7 +30,6 @@ export const ChatBoardPage = (props) => {
             aria-label="chat-board-page"
         >
             <ChatBoardAddTabPopup />
-            { renderTabsConditionally() }
             <ChatBoardQuestions
                 activeTabId={activeTabId}
             />

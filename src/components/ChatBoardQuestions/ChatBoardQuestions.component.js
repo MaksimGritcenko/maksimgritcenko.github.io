@@ -82,7 +82,7 @@ export const ChatBoardQuestions = (props) => {
         return (
             <>
                 { renderAddQuestionPopup() }
-                { renderAddItemBtn('Add Question', openAddQuestionPopup, !activeTabId) }
+                { renderAddItemBtn('Add Question', openAddQuestionPopup) }
                 { renderQuestionsSection() }
             </>
         );

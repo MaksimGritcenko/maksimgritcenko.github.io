@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import './WithChatBoardRenders.style.scss';
 
 export const WithChatBoardRenders = (Component) => (props) => {
-    function renderAddItemBtn(text, onClick, isDisabled) {
+    function renderAddItemBtn(text, onClick, isDisabled = false) {
         return (
             <IconButton
                 className="WithChatBoardRenders-AddBtn"

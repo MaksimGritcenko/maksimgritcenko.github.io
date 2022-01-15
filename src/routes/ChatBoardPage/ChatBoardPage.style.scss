@@ -6,9 +6,6 @@
     width: 95%;
 
     @include after-mobile {
-        display: grid;
-        grid-template-columns: 30% 68%;
-        column-gap: 2%;
         margin-top: 50px;
     }
 

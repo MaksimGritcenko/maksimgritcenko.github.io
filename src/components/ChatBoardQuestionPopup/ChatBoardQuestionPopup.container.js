@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { addQuestion, addQuestionFormulation, getQuestionFormulations } from 'Store/ChatBoard/ChatBoard.dispatcher';
-import { pushNotification, WARNING_TYPE } from 'Store/Notification/Notification.dispatcher';
-import { WARNING_ON_ADDING_ALREADY_EXISTING_QUESTION } from 'Utils/Constants/notificationMessages';
+import { pushNotification } from 'Store/Notification/Notification.dispatcher';
 import { updateActivePopupId } from 'Store/Popup/Popup.action';
+import { getServerTimestamp } from 'Utils/Firebase';
 
 import ChatBoardQuestionPopup from './ChatBoardQuestionPopup.component';
 
@@ -28,84 +28,54 @@ export const mapDispatchToProps = (dispatch) => ({
 
 export const ChatBoardQuestionPopupContainer = (props) => {
     const {
-        psychotypes,
         addQuestion,
-        pushNotification,
-        tabId,
-        edittingQstId,
         adminId,
-        closePopup,
-        formulation,
-        questions,
     } = props;
 
     const [questionAddInputVal, setQuestionAddInputVal] = useState('');
-    const [formulationInputVal, setFormulationInputVal] = useState('');
-    const [selectValue, setSelectValue] = useState('');
-    const [prevEdittingQstId, setPrevEdittingQstId] = useState(null);
+    const [answerAddInputVal, setAnswerAddInputVal] = useState('');
     const [isLoading, setIsLoading] = useState('');
-
-    useEffect(() => {
-        let newFormulation = '';
-
-        if (prevEdittingQstId === edittingQstId) {
-            newFormulation = formulation;
-        } else {
-            setSelectValue('');
-        }
-
-        setFormulationInputVal(newFormulation);
-        setPrevEdittingQstId(edittingQstId);
-    }, [formulation, edittingQstId]);
 
     function onQuestionAddChange(e) {
         setQuestionAddInputVal(e.target.value);
     }
 
+    function onAnswerAddChange(e) {
+        setAnswerAddInputVal(e.target.value);
+    }
+
     async function onQuestionAddClick() {
+        const timestamp = getServerTimestamp();
         const questionData = {
-            name: questionAddInputVal,
+            answerInput: answerAddInputVal,
+            questionInput: questionAddInputVal,
             adminId,
-            tabId,
+            created_at: timestamp,
+            updated_at: timestamp
         };
-
-        const isSuchQstExist = questions.length
-      && questions.some(({ data: { name } }) => name.trim() === questionAddInputVal.trim());
-
-        if (isSuchQstExist) {
-            pushNotification(WARNING_TYPE, WARNING_ON_ADDING_ALREADY_EXISTING_QUESTION);
-            return;
-        }
 
         setIsLoading(true);
         const isQuestionAdded = await addQuestion(questionData);
-        setQuestionAddInputVal('');
         setIsLoading(false);
 
         if (isQuestionAdded) {
-            closePopup();
+            setQuestionAddInputVal('');
+            setAnswerAddInputVal('');
         }
     }
 
     const containerProps = () => {
-        const {
-            data: {
-                name: activePsychotypeName,
-            } = {},
-        } = psychotypes.filter(({ id }) => id === selectValue)[0] || {};
-
         return {
             ...props,
             questionAddInputVal,
-            formulationInputVal,
-            selectValue,
-            activePsychotypeName,
+            answerAddInputVal,
             isLoading,
         };
     };
 
     const containerFunctions = {
         onQuestionAddChange,
+        onAnswerAddChange,
         onQuestionAddClick,
     };
 
